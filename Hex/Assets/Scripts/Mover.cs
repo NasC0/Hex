@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class Mover : MonoBehaviour
 {
     public Transform player;
+    public Sprite destroyed;
     [HideInInspector]
     public Vector3 currentPosition;
     [HideInInspector]
@@ -33,16 +34,18 @@ public class Mover : MonoBehaviour
         if (hit.collider != null)
         {
             Vector3 hitPosition = hit.collider.transform.position;
+
             if (hitPosition.x >= 0 && hitPosition.x <= spawner.cols - 1)
                 if (hitPosition.y - currentPosition.y <= spawner.rowDifference + 0.01f && hitPosition.y - currentPosition.y >= 0)
                     if (Mathf.Abs(hitPosition.x - currentPosition.x) <= 1)
                     {
-                        currentTile.GetComponent<Animator>().SetBool("Pulse", false);
+                        currentTile.GetComponent<Animator>().enabled = false;
+                        currentTile.GetComponent<SpriteRenderer>().sprite = destroyed;
 
                         currentTile = hit.collider.gameObject;
                         currentPosition = hitPosition;
 
-                        currentTile.GetComponent<Animator>().SetBool("Pulse", true);
+                        currentTile.GetComponent<Animator>().enabled = true;
                         hit.collider.enabled = false;
 
                         return true;

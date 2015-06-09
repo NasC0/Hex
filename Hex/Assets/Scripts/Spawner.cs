@@ -111,7 +111,7 @@ public class Spawner : MonoBehaviour
             {
                 mov.currentTile = spawnedTiles[i][2];
                 mov.currentTile.GetComponent<BoxCollider2D>().enabled = false;
-                mov.currentTile.GetComponent<Animator>().SetBool("Pulse", true);
+                mov.currentTile.GetComponent<Animator>().enabled = true;
             }
             // WIP
 
